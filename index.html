@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cor & Cia — Tintas, impermeabilizantes e acessórios para pintura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="src/icon.png">
+<style>
+:root{
+  --sky-top:#3AA0E8;
+  --sky-mid:#1E86D8;
+  --sky-bottom:#0C5FA6;
+  --green-deep:#122A22;
+  --green-mid:#173327;
+  --green-line:#274b3c;
+  --cream:#F6F3EC;
+  --cream-2:#EFEBE1;
+  --ink:#16211B;
+  --ink-soft:#4B5850;
+  --red:#DD3B2C;
+  --blue-shape:#2E63D6;
+  --white:#FFFFFF;
+  --radius-lg:28px;
+  --radius-md:18px;
+  --radius-sm:12px;
+  --max:1180px;
+  --ease:cubic-bezier(.22,.68,.16,1);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{
+  font-family:'Sora',sans-serif;
+  margin:0;
+  line-height:1.05;
+  letter-spacing:-0.01em;
+}
+p{margin:0;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+img,svg{display:block;max-width:100%;}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+@media(max-width:720px){.wrap{padding:0 20px;}}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-stagger > *{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal-stagger.in > *{opacity:1;transform:translateY(0);}
+.reveal-stagger.in > *:nth-child(1){transition-delay:.05s;}
+.reveal-stagger.in > *:nth-child(2){transition-delay:.15s;}
+.reveal-stagger.in > *:nth-child(3){transition-delay:.25s;}
+.reveal-stagger.in > *:nth-child(4){transition-delay:.35s;}
+@media (prefers-reduced-motion: reduce){
+  .reveal,.reveal-stagger > *{opacity:1 !important;transform:none !important;transition:none !important;}
+  html{scroll-behavior:auto;}
+}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 0;
+  transition:background .4s var(--ease), padding .4s var(--ease), box-shadow .4s var(--ease);
+}
+header.solid{
+  background:rgba(18,42,34,0.92);
+  backdrop-filter:blur(10px);
+  padding:12px 0;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+.nav-row{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo img{height:36px;width:auto;display:block;}
+.mobile-nav-top .logo img{height:32px;}
+.footer-brand .logo img{height:34px;}
+.navpill{
+  display:flex;align-items:center;gap:4px;
+  background:rgba(255,255,255,0.14);
+  border:1px solid rgba(255,255,255,0.22);
+  border-radius:999px;padding:6px;
+}
+.navpill a{
+  color:#fff;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px;
+  display:flex;align-items:center;gap:6px;white-space:nowrap;
+  transition:background .25s ease;
+}
+.navpill a:hover{background:rgba(255,255,255,0.16);}
+.contact-btn{
+  background:#fff;color:var(--ink);font-weight:700;font-size:14px;
+  padding:12px 22px;border-radius:999px;white-space:nowrap;
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.contact-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.18);}
+.menu-toggle{display:none;color:#fff;}
+@media(max-width:860px){
+  .navpill{display:none;}
+  .menu-toggle{display:flex;}
+}
+
+/* mobile nav */
+.mobile-nav{
+  position:fixed;inset:0;background:var(--green-deep);z-index:200;
+  display:flex;flex-direction:column;padding:26px;gap:6px;
+  transform:translateX(100%);transition:transform .4s var(--ease);
+}
+.mobile-nav.open{transform:translateX(0);}
+.mobile-nav a{color:#fff;font-size:20px;font-weight:700;padding:14px 4px;border-bottom:1px solid var(--green-line);}
+.mobile-nav-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.mobile-nav-top .logo{color:#fff;}
+.close-btn{color:#fff;}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  background:var(--green-deep);
+  padding-top:170px;
+  padding-bottom:120px;
+  overflow:hidden;
+}
+@media(min-width:861px){
+  .hero{
+    min-height:100vh;
+    padding-top:120px;
+    padding-bottom:60px;
+    display:flex;
+    align-items:center;
+  }
+  .hero > .hero-content{width:100%;}
+}
+.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg, rgba(6,20,34,.5) 0%, rgba(6,20,34,.25) 45%, rgba(4,14,24,.62) 100%);
+}
+.hero-content{position:relative;z-index:2;text-align:center;padding-bottom:40px;}
+.hero-content h1{
+  color:#fff;font-size:clamp(34px,6vw,64px);font-weight:800;
+  text-shadow:0 6px 30px rgba(0,40,80,.25);
+}
+.hero-content .sub{
+  max-width:520px;margin:22px auto 0;color:rgba(255,255,255,0.92);
+  font-size:16px;line-height:1.6;
+}
+.hero-ctas{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:30px;flex-wrap:wrap;}
+.btn-pill{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--ink);color:#fff;font-weight:700;font-size:14.5px;
+  padding:15px 24px;border-radius:999px;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+}
+.btn-pill.light{background:#fff;color:var(--ink);}
+.btn-pill:hover{transform:translateY(-3px);box-shadow:0 14px 26px rgba(0,0,0,.22);}
+.btn-pill svg{width:16px;height:16px;}
+.link-cta{display:inline-flex;align-items:center;gap:10px;font-weight:700;color:#fff;font-size:14.5px;}
+.link-cta .circ{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;}
+
+.storefront{position:relative;z-index:1;margin-top:56px;}
+.storefront svg{width:100%;height:auto;display:block;}
+
+/* ---------- section shells ---------- */
+section{position:relative;}
+.section-pad{padding:110px 0;}
+@media(max-width:720px){.section-pad{padding:76px 0;}}
+.dark{background:var(--green-deep);color:#fff;}
+.eyebrow{
+  font-size:13px;font-weight:700;color:var(--ink-soft);letter-spacing:.02em;
+}
+.dark .eyebrow{color:#9fb0a6;}
+.section-head{max-width:640px;}
+.section-head h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;}
+.section-head .lead{margin-top:14px;font-size:16px;line-height:1.65;color:var(--ink-soft);}
+.dark .section-head .lead{color:#c4d0c9;}
+
+/* ---------- benefits (dark green) ---------- */
+.benefits-grid{
+  display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center;margin-top:60px;
+}
+@media(max-width:900px){.benefits-grid{grid-template-columns:1fr;gap:44px;}}
+.benefit-list{display:grid;grid-template-columns:1fr 1fr;gap:28px 32px;}
+@media(max-width:520px){.benefit-list{grid-template-columns:1fr;}}
+.benefit-item .icon{
+  width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.benefit-item .icon svg{width:19px;height:19px;stroke:#fff;}
+.benefit-item h3{font-size:16.5px;font-weight:700;}
+.benefit-item p{margin-top:6px;font-size:14px;color:#b9c6bf;line-height:1.55;}
+.benefit-visual{position:relative;}
+.benefit-visual img{width:100%;height:auto;border-radius:var(--radius-lg);display:block;}
+
+/* ---------- products ---------- */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;}
+@media(max-width:900px){.products-grid{grid-template-columns:1fr;}}
+.product-card{
+  background:var(--green-deep);color:#fff;border-radius:var(--radius-lg);
+  padding:28px;display:flex;flex-direction:column;gap:18px;min-height:340px;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.product-card:hover{transform:translateY(-8px);box-shadow:0 24px 46px rgba(18,42,34,.28);}
+.product-card .idx{font-size:12.5px;font-weight:700;color:#8fd3ad;background:rgba(255,255,255,.08);padding:5px 10px;border-radius:999px;width:fit-content;}
+.product-card h3{font-size:19px;font-weight:700;}
+.product-card p{font-size:13.5px;color:#c1cdc6;line-height:1.6;}
+.product-card .can-wrap{margin-top:auto;display:flex;justify-content:flex-end;}
+.product-card .can-wrap img{width:128px;height:128px;object-fit:cover;border-radius:16px;display:block;}
+.product-card .req-btn{
+  margin-top:14px;display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,0.08);padding:11px 16px;border-radius:999px;
+  font-size:13px;font-weight:600;width:fit-content;
+  transition:background .25s ease;
+}
+.product-card .req-btn:hover{background:rgba(255,255,255,0.16);}
+.product-card .req-btn .arrow{width:22px;height:22px;border-radius:50%;background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;}
+.product-card .req-btn .arrow svg{width:11px;height:11px;}
+
+/* ---------- color picker ---------- */
+.color-row{display:flex;gap:28px;margin-top:56px;overflow-x:auto;overflow-y:hidden;padding:22px 6px 34px 6px;}
+.color-row::-webkit-scrollbar{height:6px;}
+.color-swatch{
+  flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;
+  cursor:pointer;background:none;
+}
+.color-swatch .circle{
+  width:64px;height:64px;border-radius:50%;border:3px solid transparent;
+  transition:transform .3s var(--ease), border-color .3s ease, box-shadow .3s ease;
+}
+.color-swatch.active .circle{
+  border-color:var(--ink);transform:scale(1.14);
+  box-shadow:0 10px 24px rgba(0,0,0,.15);
+}
+.color-swatch .cname{font-size:13px;font-weight:700;}
+.color-swatch .chex{font-size:11px;color:var(--ink-soft);}
+.room-stage{
+  margin-top:48px;border-radius:var(--radius-lg);overflow:hidden;background:#fff;
+  box-shadow:0 30px 70px rgba(20,40,30,.12);
+}
+.room-stage svg{width:100%;height:auto;display:block;}
+#roomWall,#roomWallSide{transition:fill 0.6s var(--ease);}
+
+/* ---------- location ---------- */
+.location-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;margin-top:56px;align-items:stretch;}
+@media(max-width:900px){.location-wrap{grid-template-columns:1fr;}}
+.map-box{position:relative;border-radius:var(--radius-lg);overflow:hidden;min-height:380px;background:#e7e6df;}
+.map-box iframe{width:100%;height:100%;position:absolute;inset:0;border:0;}
+.loc-side{display:flex;flex-direction:column;gap:16px;justify-content:center;}
+.loc-card{
+  background:#fff;border:1px solid #E7E3D8;border-radius:var(--radius-md);padding:22px 24px;
+  display:flex;gap:16px;align-items:flex-start;
+}
+.loc-card .icon{width:38px;height:38px;border-radius:10px;background:var(--cream-2);display:flex;align-items:center;justify-content:center;flex:none;}
+.loc-card .icon svg{width:18px;height:18px;}
+.loc-card h4{font-size:15px;font-weight:700;}
+.loc-card p{font-size:13.5px;color:var(--ink-soft);margin-top:4px;line-height:1.55;}
+
+/* ---------- institutional ---------- */
+.institutional{position:relative;}
+.inst-inner{max-width:780px;}
+.inst-inner .kicker{color:#8fd3ad;font-weight:700;font-size:13px;}
+.inst-inner h2{margin-top:16px;font-size:clamp(24px,3.4vw,34px);font-weight:700;line-height:1.4;}
+.inst-inner h2 .hl{color:#8fd3ad;}
+.inst-stats{display:flex;gap:44px;margin-top:44px;flex-wrap:wrap;}
+.inst-stats .stat b{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;display:block;}
+.inst-stats .stat span{font-size:13px;color:#9fb0a6;}
+
+/* ---------- CTA ---------- */
+.cta-section{background:var(--green-deep);color:#fff;overflow:hidden;}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+@media(max-width:900px){.cta-grid{grid-template-columns:1fr;}}
+.cta-grid h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;}
+.cta-grid .lead{margin-top:14px;font-size:15px;color:#c1cdc6;max-width:420px;}
+.cta-ctas{display:flex;align-items:center;gap:22px;margin-top:30px;flex-wrap:wrap;}
+.cta-visual{position:relative;}
+.cta-visual img{width:100%;height:auto;border-radius:var(--radius-lg);display:block;}
+
+/* ---------- footer ---------- */
+footer{background:var(--cream-2);padding:70px 0 26px;}
+.footer-top{display:flex;justify-content:space-between;gap:50px;flex-wrap:wrap;}
+.footer-brand{max-width:280px;}
+.footer-brand .logo{color:var(--ink);}
+.footer-brand p{font-size:13.5px;color:var(--ink-soft);margin-top:14px;line-height:1.6;}
+.footer-cols{display:flex;gap:56px;flex-wrap:wrap;}
+.footer-col h5{font-size:12.5px;font-weight:700;letter-spacing:.03em;color:var(--ink-soft);text-transform:uppercase;}
+.footer-col a,.footer-col p{display:block;margin-top:14px;font-size:14px;color:var(--ink);}
+.footer-col a{transition:opacity .2s ease;}
+.footer-col a:hover{opacity:.6;}
+.footer-bottom{
+  margin-top:56px;padding-top:22px;border-top:1px solid #DCD6C8;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:12.5px;color:var(--ink-soft);
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header id="siteHeader">
+  <div class="wrap nav-row">
+    <div class="logo"><img src="src/logo.png" alt="Cor & Cia"></div>
+    <nav class="navpill">
+      <a href="#hero">Início</a>
+      <a href="#institucional">Empresa</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#onde-encontrar">Onde estamos</a>
+    </nav>
+    <a href="https://wa.me/5554981251873?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Cor%20%26%20Cia." target="_blank" rel="noopener" class="contact-btn">Contato</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+      <svg width="26" height="18" viewBox="0 0 26 18" fill="none"><path d="M0 1H26M0 9H26M0 17H26" stroke="white" stroke-width="2"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-top">
+    <div class="logo"><img src="src/logo.png" alt="Cor & Cia"></div>
+    <button class="close-btn" id="closeMenu" aria-label="Fechar menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M1 1L21 21M21 1L1 21" stroke="white" stroke-width="2"/></svg>
+    </button>
+  </div>
+  <a href="#hero">Início</a>
+  <a href="#institucional">Empresa</a>
+  <a href="#produtos">Produtos</a>
+  <a href="#onde-encontrar">Onde estamos</a>
+  <a href="https://wa.me/5554981251873?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Cor%20%26%20Cia." target="_blank" rel="noopener">Contato</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+  <img src="src/fundo.png" alt="" class="hero-bg-img">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content wrap reveal" id="heroContent">
+    <h1>Transforme ambientes.<br>Valorize cada detalhe.</h1>
+    <p class="sub">Tintas, impermeabilizantes e acessórios para pintura com orçamento no local e entrega gratuita em Vacaria e região.</p>
+    <div class="hero-ctas">
+      <a href="#produtos" class="btn-pill">Peça seu orçamento
+        <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://wa.me/5554981251873?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Cor%20%26%20Cia." target="_blank" rel="noopener" class="link-cta"><span class="circ">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>Falar no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BENEFÍCIOS ===================== -->
+<section class="dark section-pad" id="beneficios">
+  <div class="wrap">
+    <div class="benefits-grid">
+      <div class="reveal">
+        <span class="eyebrow">POR QUE ESCOLHER A COR &amp; CIA</span>
+        <h2 style="margin-top:14px;">Tudo o que o seu projeto precisa, do preparo ao acabamento.</h2>
+        <div class="benefit-list" style="margin-top:44px;">
+          <div class="benefit-item">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Qualidade</h3>
+            <p>Tintas e acabamentos selecionados para durar por anos.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Variedade</h3>
+            <p>Linha completa de tintas, impermeabilizantes e acessórios.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M8 10h8M8 14h5M4 4h16v16H4z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Orientação</h3>
+            <p>Equipe pronta para ajudar você a escolher a solução certa.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12h11l4 5H3z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 12V7h3l3 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Entrega grátis</h3>
+            <p>Entrega gratuita em todo o perímetro urbano de Vacaria.</p>
+          </div>
+        </div>
+      </div>
+      <div class="benefit-visual reveal">
+        <img src="src/tintas.jpg" alt="Linha de tintas Cor & Cia">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRODUTOS ===================== -->
+<section class="section-pad" id="produtos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">CATÁLOGO</span>
+      <h2 style="margin-top:14px;">Nossos produtos</h2>
+      <p class="lead">Encontre tintas, acessórios e revestimentos para cada etapa da sua obra.</p>
+    </div>
+
+    <div class="products-grid reveal-stagger">
+      <div class="product-card">
+        <span class="idx">01</span>
+        <h3>Tintas</h3>
+        <p>Acrílicas, látex e esmaltes com alta cobertura e acabamento impecável para áreas internas e externas.</p>
+        <div class="can-wrap">
+          <img src="src/produto1.png" alt="Tintas Cor & Cia">
+        </div>
+        <a href="https://wa.me/5554981251873?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="req-btn">Solicite um orçamento <span class="arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.7"/></svg></span></a>
+      </div>
+
+      <div class="product-card">
+        <span class="idx">02</span>
+        <h3>Impermeabilizantes</h3>
+        <p>Proteção máxima contra umidade e infiltrações em lajes, muros, caixas d'água e áreas externas.</p>
+        <div class="can-wrap">
+          <img src="src/produto2.png" alt="Impermeabilizantes Cor & Cia">
+        </div>
+        <a href="https://wa.me/5554981251873?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="req-btn">Solicite um orçamento <span class="arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.7"/></svg></span></a>
+      </div>
+
+      <div class="product-card">
+        <span class="idx">03</span>
+        <h3>Acessórios</h3>
+        <p>Rolos, pincéis, fitas e ferramentas selecionadas para garantir um acabamento profissional.</p>
+        <div class="can-wrap">
+          <img src="src/produto3.png" alt="Acessórios Cor & Cia">
+        </div>
+        <a href="https://wa.me/5554981251873?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="req-btn">Solicite um orçamento <span class="arrow"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.7"/></svg></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CORES ===================== -->
+<section class="section-pad" id="cores" style="background:var(--cream-2);">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin:0 auto;text-align:center;max-width:560px;">
+      <span class="eyebrow">PALETA DE CORES</span>
+      <h2 style="margin-top:14px;">Encontre a cor que combina com o seu projeto.</h2>
+      <p class="lead">Toque em uma cor e veja como ela se comporta no ambiente.</p>
+    </div>
+
+    <div class="color-row reveal" id="colorRow" style="justify-content:center;">
+      <button class="color-swatch active" data-color="#E4D9C4" data-name="Areia">
+        <span class="circle" style="background:#E4D9C4;"></span><span class="cname">Areia</span><span class="chex">#E4D9C4</span>
+      </button>
+      <button class="color-swatch" data-color="#A9B79A" data-name="Sálvia">
+        <span class="circle" style="background:#A9B79A;"></span><span class="cname">Sálvia</span><span class="chex">#A9B79A</span>
+      </button>
+      <button class="color-swatch" data-color="#C97B54" data-name="Terracota">
+        <span class="circle" style="background:#C97B54;"></span><span class="cname">Terracota</span><span class="chex">#C97B54</span>
+      </button>
+      <button class="color-swatch" data-color="#4C5854" data-name="Grafite">
+        <span class="circle" style="background:#4C5854;"></span><span class="cname">Grafite</span><span class="chex">#4C5854</span>
+      </button>
+      <button class="color-swatch" data-color="#F3EFE6" data-name="Marfim">
+        <span class="circle" style="background:#F3EFE6;border-color:#ddd;"></span><span class="cname">Marfim</span><span class="chex">#F3EFE6</span>
+      </button>
+      <button class="color-swatch" data-color="#5C7A96" data-name="Azul Serra">
+        <span class="circle" style="background:#5C7A96;"></span><span class="cname">Azul Serra</span><span class="chex">#5C7A96</span>
+      </button>
+    </div>
+
+    <div class="room-stage reveal">
+      <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg">
+        <!-- ================= PAREDE DE FUNDO (esquerda) ================= -->
+        <polygon points="160,380 520,260 520,40 160,160" id="roomWall" fill="#E4D9C4"/>
+        <!-- ================= PAREDE LATERAL (direita, sombreada) ================= -->
+        <polygon points="820,420 520,260 520,40 820,200" id="roomWallSide" fill="#E4D9C4"/>
+        <polygon points="820,420 520,260 520,40 820,200" fill="#000000" opacity="0.14"/>
+        <!-- rodapé -->
+        <polygon points="160,380 520,260 520,272 160,392" fill="#00000022"/>
+        <polygon points="820,420 520,260 520,272 820,432" fill="#00000022"/>
+
+        <!-- ================= PISO ================= -->
+        <polygon points="460,540 820,420 520,260 160,380" fill="#D8C5A3"/>
+        <!-- tapete -->
+        <polygon points="469,498 721,414 511,302 259,386" fill="#EFE6D6"/>
+
+        <!-- janela (parede de fundo) -->
+        <polygon points="214,307 304,277 304,167 214,197" fill="#F7F6F2" stroke="#cfcabd" stroke-width="5"/>
+        <line x1="259" y1="292" x2="259" y2="182" stroke="#cfcabd" stroke-width="4"/>
+
+        <!-- quadro (parede lateral) -->
+        <polygon points="790,327 715,287 715,199 790,239" fill="#ffffff" stroke="#d8d2c3" stroke-width="5"/>
+        <polygon points="775,313 730,290 730,225 775,248" fill="#C97B54" opacity="0.55"/>
+
+        <!-- planta (canto de trás) -->
+        <path d="M721,414 C704,380 712,340 721,320 C730,340 738,380 721,414 Z" fill="#4C6B52"/>
+        <path d="M721,392 C736,365 754,350 764,344 C758,362 745,388 721,392 Z" fill="#5C7A5C"/>
+        <path d="M721,392 C706,365 688,350 678,344 C684,362 697,388 721,392 Z" fill="#5C7A5C"/>
+        <polygon points="702,414 740,414 733,444 709,444" fill="#7a6248"/>
+
+        <!-- mesa de centro redonda -->
+        <ellipse cx="604" cy="412" rx="58" ry="24" fill="#6b543d"/>
+        <rect x="546" y="372" width="116" height="40" fill="#8a6c52"/>
+        <ellipse cx="604" cy="372" rx="58" ry="24" fill="#9c7d61"/>
+
+        <!-- sofá -->
+        <polygon points="415,438 541,396 466,356 340,398" fill="#F4F0E8"/>
+        <polygon points="415,388 541,346 466,306 340,348" fill="#FBF9F4"/>
+        <polygon points="415,388 541,346 541,396 415,438" fill="#E3DCCB"/>
+        <polygon points="415,388 340,348 340,398 415,438" fill="#EFE9DC"/>
+        <!-- pezinhos -->
+        <rect x="410" y="438" width="8" height="13" rx="1.5" fill="#5c4632"/>
+        <rect x="536" y="396" width="8" height="13" rx="1.5" fill="#5c4632"/>
+        <rect x="336" y="398" width="8" height="13" rx="1.5" fill="#5c4632"/>
+        <!-- costura entre almofadas do assento -->
+        <line x1="478" y1="367" x2="478" y2="417" stroke="#DCD3C2" stroke-width="2"/>
+        <line x1="478" y1="367" x2="403" y2="327" stroke="#EDE6D8" stroke-width="2"/>
+        <!-- encosto -->
+        <polygon points="340,348 466,306 466,251 340,293" fill="#FBF9F4"/>
+        <polygon points="466,306 466,251 516,266 516,321" fill="#E3DCCB"/>
+        <line x1="403" y1="327" x2="403" y2="272" stroke="#EDE6D8" stroke-width="2"/>
+        <!-- braço direito -->
+        <polygon points="515.8,330.4 541,322 466,282 440.8,290.4" fill="#FBF9F4"/>
+        <polygon points="515.8,330.4 541,322 541,346 515.8,354.4" fill="#E3DCCB"/>
+        <!-- braço esquerdo -->
+        <polygon points="415,364 440.2,355.6 365.2,315.6 340,324" fill="#FBF9F4"/>
+        <polygon points="415,364 340,324 340,348 415,388" fill="#EFE9DC"/>
+        <!-- almofada decorativa -->
+        <polygon points="410,367 418,371 405,375 398,371" fill="#C97B54"/>
+
+        <!-- mesa lateral pequena -->
+        <ellipse cx="573" cy="430" rx="24" ry="10" fill="#7a5c40"/>
+        <rect x="549" y="406" width="48" height="24" fill="#9c7d61"/>
+        <ellipse cx="573" cy="406" rx="24" ry="10" fill="#b4977a"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ONDE ENCONTRAR ===================== -->
+<section class="section-pad" id="onde-encontrar">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">VISITE A LOJA</span>
+      <h2 style="margin-top:14px;">Venha conhecer a Cor &amp; Cia.</h2>
+      <p class="lead">Estamos em Vacaria há mais de 25 anos, prontos para atender o seu projeto pessoalmente.</p>
+    </div>
+
+    <div class="location-wrap reveal">
+      <div class="map-box">
+        <iframe
+          src="https://maps.google.com/maps?q=Cor%20e%20Cia%20Tintas%20-%20R.%20J%C3%BAlio%20de%20Castilhos%2C%20915%20-%20Centro%2C%20Vacaria%20-%20RS%2C%2095200-000&z=16&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+          title="Localização da Cor & Cia no Google Maps"></iframe>
+      </div>
+
+      <div class="loc-side">
+        <div class="loc-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 21V9l8-6 8 6v12h-6v-7h-4v7H4z" stroke="#122A22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Orçamento no local</h4><p>Nossa equipe visita a sua obra e faz um orçamento sem compromisso.</p></div>
+        </div>
+        <div class="loc-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12h11l4 5H3z" stroke="#122A22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 12V7h3l3 4" stroke="#122A22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Entrega gratuita</h4><p>Entregamos sem custo em todo o perímetro urbano de Vacaria.</p></div>
+        </div>
+        <div class="loc-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v4l3 2" stroke="#122A22" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#122A22" stroke-width="1.8"/></svg></div>
+          <div><h4>Mais de 25 anos</h4><p>Atendendo Vacaria e região desde 2001, com quem entende de pintura.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INSTITUCIONAL ===================== -->
+<section class="dark section-pad institutional" id="institucional">
+  <div class="wrap">
+    <div class="inst-inner reveal">
+      <span class="kicker">NOSSA HISTÓRIA</span>
+      <h2>Cor não é só acabamento. É <span class="hl">identidade e proteção</span> para cada ambiente que ajudamos a transformar.</h2>
+      <p style="margin-top:22px;font-size:15.5px;line-height:1.75;color:#c1cdc6;max-width:660px;">
+        Fundada em abril de 2001 por Jean Manoel Gomez e Julio Siqueira, a Cor &amp; Cia nasceu com o propósito de oferecer tintas e soluções para pintura em Vacaria e região. Mais do que uma loja de tintas, buscamos facilitar cada etapa do processo — com orçamento realizado no local, sem compromisso, e entrega gratuita dentro do perímetro urbano.
+      </p>
+      <div class="inst-stats">
+        <div class="stat"><b>2001</b><span>Ano de fundação</span></div>
+        <div class="stat"><b>25+</b><span>Anos de atuação</span></div>
+        <div class="stat"><b>Vacaria</b><span>E toda a região</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta-section section-pad" id="cta">
+  <div class="wrap">
+    <div class="cta-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="color:#8fd3ad;">FALE COM A GENTE</span>
+        <h2 style="margin-top:14px;">Pronto para transformar seu próximo ambiente?</h2>
+        <p class="lead">Fale com a nossa equipe e receba um orçamento sem compromisso, direto no seu endereço.</p>
+        <div class="cta-ctas">
+          <a href="https://wa.me/5554981251873?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn-pill light">Peça seu orçamento
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://wa.me/5554981251873?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" class="link-cta">Fale com um vendedor <span class="circ"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+      </div>
+      <div class="cta-visual reveal">
+        <img src="src/cta.png" alt="Transforme seu próximo ambiente com a Cor & Cia">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo"><img src="src/logo.png" alt="Cor & Cia"></div>
+        <p>Tintas, impermeabilizantes e acessórios para pintura em Vacaria desde 2001. Orçamento no local e entrega gratuita.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Institucional</h5>
+          <a href="#institucional">Sobre a Cor &amp; Cia</a>
+          <a href="#institucional">Nossa história</a>
+          <a href="#onde-encontrar">Onde estamos</a>
+        </div>
+        <div class="footer-col">
+          <h5>Produtos</h5>
+          <a href="#produtos">Tintas</a>
+          <a href="#produtos">Impermeabilizantes</a>
+          <a href="#produtos">Acessórios</a>
+          <a href="#produtos">Texturas &amp; Efeitos</a>
+        </div>
+        <div class="footer-col">
+          <h5>Suporte</h5>
+          <a href="#">Dúvidas frequentes</a>
+          <a href="#">Política de privacidade</a>
+          <a href="#">Termos de uso</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contato</h5>
+          <a href="https://wa.me/5554981251873?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Cor%20%26%20Cia." target="_blank" rel="noopener">WhatsApp: (54) 98125-1873</a>
+          <a href="tel:+555432313131">Telefone: (54) 3231-3131</a>
+          <a href="mailto:coreciavacariars@gmail.com">coreciavacariars@gmail.com</a>
+          <p>Vacaria, RS</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Cor &amp; Cia. Todos os direitos reservados.</span>
+      <span>Feito com cuidado em Vacaria, RS</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// header solid on scroll
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) header.classList.add('solid');
+  else header.classList.remove('solid');
+});
+
+// mobile nav
+const menuToggle = document.getElementById('menuToggle');
+const closeMenu = document.getElementById('closeMenu');
+const mobileNav = document.getElementById('mobileNav');
+menuToggle.addEventListener('click', () => mobileNav.classList.add('open'));
+closeMenu.addEventListener('click', () => mobileNav.classList.remove('open'));
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+// reveal on scroll
+const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => io.observe(el));
+
+// hero entrance (immediate)
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.getElementById('heroContent').classList.add('in');
+  }, 150);
+});
+
+// color picker interactivity
+const swatches = document.querySelectorAll('.color-swatch');
+const wall = document.getElementById('roomWall');
+const wallSide = document.getElementById('roomWallSide');
+swatches.forEach(sw => {
+  sw.addEventListener('click', () => {
+    swatches.forEach(s => s.classList.remove('active'));
+    sw.classList.add('active');
+    wall.setAttribute('fill', sw.dataset.color);
+    wallSide.setAttribute('fill', sw.dataset.color);
+  });
+});
+</script>
+</body>
+</html>
